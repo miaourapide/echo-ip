@@ -6,21 +6,15 @@ on:
   pull_request:
     branches: [ "master" ]
 
-jobs:
-  test:
+jobs:      
+  build:
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v3
     - name: Run tests
-      run: go test
-
-    
-
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
+      run: docker build --target test . --file Dockerfile 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ip-echo:$(date +%s)
+      run: docker build --target build . --file Dockerfile --tag ip-echo:$(date +%s)
+    - name: Run
+      run: docker build --target run . --file Dockerfile 
