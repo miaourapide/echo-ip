@@ -6,10 +6,6 @@ import (
 	"net/http"
 )
 
-const template = `{
-    "ip": "%s"
-}`
-
 type IpResponse struct {
 	Ip string `json:"ip"`
 }
